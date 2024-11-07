@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkboxes</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <p>checkboxes</p>
+    </header>
+
+    <button class="button"></button>
+
+    <script>
+
+    const button = document.querySelector('.button');
+    const body = document.querySelector("body");
+    const headerBorder = document.querySelector(".header");
+
+    console.log(headerBorder)
+
+    let isDark = true;
+
+    button.addEventListener('click', (e) => {
+        if (isDark) {
+            body.style.backgroundColor = "white";
+            body.style.color = "black";
+            button.style.backgroundColor = "black";
+            headerBorder.style.borderColor = "black";
+        } else {
+            body.style.backgroundColor = "black";
+            body.style.color = "white";
+            button.style.backgroundColor = "white";
+            headerBorder.style.borderColor = "white";
+        }
+        isDark = !isDark;
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 300;
+    font-size: 20px;
+    font-style: normal;
+    background-color: black;
+    color: #fff;
+}
+
+.header {
+    border: 2px solid #fff;       
+    border-radius: 12px;         
+    padding: 0px 25px;          
+    text-align: left;
+    font-size: 20px;
+    width: 100%;                  
+    box-sizing: border-box; 
+    margin: 0;
+    margin-top: 10px;
+}
+
+
+.button {
+    background-color: #fff;
+    border-radius: 12px;   
+    padding: 2px;
+    position: fixed;
+    top: 33px;
+    right: 20px;
+    width: 25px;
+    height: 25px;
+    border: solid black 2px;
+    cursor: pointer;
+}
