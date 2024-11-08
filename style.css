@@ -1,38 +1,262 @@
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
     margin: 0;
     font-family: 'JetBrains Mono', monospace;
     font-weight: 300;
-    font-size: 20px;
-    font-style: normal;
-    background-color: black;
+    font-size: 16px;
+    background: black;
     color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: #111;
+    border-radius: 15px;
+    padding: 30px;
+    width: 90%;
+    max-width: 1000px;
+    border: 1px solid #333;
 }
 
 .header {
-    border: 2px solid #fff;       
-    border-radius: 12px;         
-    padding: 0px 25px;          
-    text-align: left;
-    font-size: 20px;
-    width: 100%;                  
-    box-sizing: border-box; 
-    margin: 0;
-    margin-top: 10px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 300;
+}
 
-.button {
-    background-color: #fff;
-    border-radius: 12px;   
-    padding: 2px;
-    position: fixed;
-    top: 33px;
-    right: 20px;
-    width: 25px;
-    height: 25px;
-    border: solid black 2px;
+.theme-toggle {
+    padding: 8px 20px;
+    background: transparent;
+    border: 1px solid #333;
+    color: inherit;
     cursor: pointer;
+    border-radius: 4px;
+    font-family: inherit;
+    transition: background-color 0.2s;
+}
+
+.theme-toggle:hover {
+    background: #333;
+}
+
+.task-input {
+    display: flex;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+#taskInput {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    font-family: inherit;
+    background: transparent;
+    border: 1px solid #333;
+    color: inherit;
+    border-radius: 4px;
+}
+
+#addTaskButton {
+    padding: 8px 20px;
+    font-size: 16px;
+    font-family: inherit;
+    background: transparent;
+    border: 1px solid #333;
+    color: inherit;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+#addTaskButton:hover {
+    background: #333;
+}
+
+#taskTableContainer {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    color: inherit;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    position: relative;
+}
+
+.date-column {
+    text-align: left;
+    padding-left: 20px;
+    border-right: 1px solid #333;
+    width: 120px;
+}
+
+th {
+    border-bottom: 1px solid #333;
+    font-weight: normal;
+}
+
+td input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #333;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+}
+
+td input[type="checkbox"]:checked {
+    background-color: #333;
+}
+
+td input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 14px;
+}
+
+.delete-task {
+    position: absolute;
+    top: -8px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+th:hover .delete-task {
+    opacity: 1;
+}
+
+/* Light theme styles */
+body.light-theme {
+    background: white;
+    color: black;
+}
+
+.light-theme .container {
+    background: #f5f5f5;
+    border-color: #ddd;
+}
+
+.light-theme .theme-toggle,
+.light-theme #taskInput,
+.light-theme #addTaskButton {
+    border-color: #ddd;
+}
+
+.light-theme td input[type="checkbox"] {
+    border-color: #ddd;
+}
+
+.light-theme td input[type="checkbox"]:checked {
+    background-color: #ddd;
+}
+
+.light-theme .date-column {
+    border-right-color: #ddd;
+}
+
+.light-theme th {
+    border-bottom-color: #ddd;
+}
+
+/* Add these styles to your existing CSS */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.confirmation-dialog {
+    background: #111;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #333;
+    z-index: 1001;
+}
+
+.light-theme .confirmation-dialog {
+    background: #f5f5f5;
+    border-color: #ddd;
+}
+
+.confirmation-dialog p {
+    margin: 0 0 20px 0;
+    font-size: 16px;
+}
+
+.confirmation-dialog button {
+    padding: 8px 20px;
+    margin: 0 10px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.confirm-delete {
+    background: #ff4444;
+    color: white;
+    border: none;
+}
+
+.confirm-delete:hover {
+    background: #ff6666;
+}
+
+.cancel-delete {
+    background: transparent;
+    border: 1px solid #333;
+    color: inherit;
+}
+
+.light-theme .cancel-delete {
+    border-color: #ddd;
+}
+
+.cancel-delete:hover {
+    background: #333;
+}
+
+.light-theme .cancel-delete:hover {
+    background: #ddd;
 }
